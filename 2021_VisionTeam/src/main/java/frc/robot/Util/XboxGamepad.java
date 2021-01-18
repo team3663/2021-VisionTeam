@@ -4,11 +4,18 @@
 
 package frc.robot.Util;
 
+
 import edu.wpi.first.wpilibj.XboxController;
 
 /** Add your docs here. */
 public class XboxGamepad extends XboxController{
     private double deadzone;
+  
+
+
+
+
+
 
     public XboxGamepad(int port, double deadzone) {
         super(port);
@@ -17,7 +24,6 @@ public class XboxGamepad extends XboxController{
     }
 
     @Override
-
     public double getRawAxis(int axis) {
 
         double reading = super.getRawAxis(axis);
@@ -28,4 +34,6 @@ public class XboxGamepad extends XboxController{
         return reading;
         
     }
+    
+    
 }

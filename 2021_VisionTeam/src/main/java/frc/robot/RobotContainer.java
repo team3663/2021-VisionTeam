@@ -5,8 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Util.XboxGamepad;
+import frc.robot.input.XboxController;
+import frc.robot.commands.C_Track;
 import frc.robot.drivers.LimeLight;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
 
- private static final XboxGamepad DRIVE_CONTROLLER = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
+ private static final XboxController driverController = new XboxController(Constants.Xbox_Driver_Controller);
 
  private static final LimeLight limeLight = new LimeLight();
 
@@ -37,7 +37,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+  driverController.getAButton().whenHeld(new C_Track());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -49,8 +51,8 @@ public class RobotContainer {
     return null;
   }
 
-  public static XboxGamepad getXboxController() {
-     return DRIVE_CONTROLLER;
+  public static XboxController getXboxController() {
+     return driverController;
   }
 
 public static LimeLight getLimeLight() {

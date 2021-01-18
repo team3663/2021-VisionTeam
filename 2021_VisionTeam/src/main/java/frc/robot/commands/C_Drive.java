@@ -4,17 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
+import frc.robot.input.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.Util.XboxGamepad;
 import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_Drive extends CommandBase {
   /** Creates a new C_Drive. */
 private SS_DriveTrain drive;
-private XboxGamepad controller;
+private XboxController controller;
+
   public C_Drive() {
     drive = SS_DriveTrain.getinstance();
     controller = RobotContainer.getXboxController();
@@ -31,7 +30,7 @@ private XboxGamepad controller;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.setPower(controller.getRawAxis(Axis.kLeftY.value), controller.getRawAxis(Axis.kRightY.value));
+    drive.setPower(controller.getRightJoystickYAxis().get(), controller.getLeftJoystickYAxis().get());
   }
 
   // Called once the command ends or is interrupted.

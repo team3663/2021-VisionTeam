@@ -3,10 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.Util.XboxGamepad;
+import frc.robot.input.*;
 import frc.robot.drivers.LimeLight;
 import frc.robot.subsystems.SS_DriveTrain;
 
@@ -23,7 +24,7 @@ public class C_Track extends CommandBase {
   private final double kD = 0.0;
 
   //Controllers
-  private XboxGamepad driveController = RobotContainer.getXboxController();
+  private XboxController driveController = RobotContainer.getXboxController();
 
   //Robot Componets
   private LimeLight limeLight = RobotContainer.getLimeLight();
@@ -46,7 +47,7 @@ public class C_Track extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+
     //LimeLight Init
     //when you are initing the Lime Light you need to turn on the light
     //  and just in case i set the mode to default.
