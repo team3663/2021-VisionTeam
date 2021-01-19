@@ -1,6 +1,7 @@
 package frc.robot.input;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -26,6 +27,9 @@ public class XboxController extends Controller {
     private final Axis rightJoystickYAxis;
     private final Axis rightJoystickXAxis;
 
+    private final AxisButton leftTriggerButton;
+    private final AxisButton rightTriggerButton;
+
     public XboxController(int port){
         joystick = new Joystick(port);
 
@@ -49,7 +53,8 @@ public class XboxController extends Controller {
         rightJoystickXAxis = new JoystickAxis(joystick, 4);
         rightJoystickYAxis = new JoystickAxis(joystick, 5);
 
-        
+        leftTriggerButton = new AxisButton(leftTriggerAxis, .25);
+        rightTriggerButton = new AxisButton(rightTriggerAxis, .25);        
     }
 
     @Override
@@ -130,6 +135,12 @@ public class XboxController extends Controller {
     @Override
     public Button getRightJoystickButton() {
         return leftStickButton;
+    }
+    public AxisButton getLeftTriggerButton(double forceAmount, final Command command){
+        return leftTriggerButton;
+    }
+    public AxisButton getRightTriggerButton(double forceAmount, final Command command){
+        return rightTriggerButton;
     }
     
 }
