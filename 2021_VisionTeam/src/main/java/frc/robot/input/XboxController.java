@@ -27,8 +27,8 @@ public class XboxController extends Controller {
     private final Axis rightJoystickYAxis;
     private final Axis rightJoystickXAxis;
 
-    private final AxisButton leftTriggerButton;
-    private final AxisButton rightTriggerButton;
+    private final JoystickButtonAxis leftTriggerButton;
+    private final JoystickButtonAxis rightTriggerButton;
 
     public XboxController(int port){
         joystick = new Joystick(port);
@@ -37,10 +37,13 @@ public class XboxController extends Controller {
         bButton = new JoystickButton(joystick, 2);
         xButton = new JoystickButton(joystick, 3);
         yButton = new JoystickButton(joystick, 4);
+
         leftBumperButton = new JoystickButton(joystick, 5);
         rightBumperButton = new JoystickButton(joystick, 6);
+
         backButton = new JoystickButton(joystick, 7);
         startButton = new JoystickButton(joystick, 8);
+
         leftStickButton = new JoystickButton(joystick, 9);
         rightStickButton = new JoystickButton(joystick, 10);
 
@@ -53,8 +56,8 @@ public class XboxController extends Controller {
         rightJoystickXAxis = new JoystickAxis(joystick, 4);
         rightJoystickYAxis = new JoystickAxis(joystick, 5);
 
-        leftTriggerButton = new AxisButton(leftTriggerAxis, .25);
-        rightTriggerButton = new AxisButton(rightTriggerAxis, .25);        
+        leftTriggerButton = new JoystickButtonAxis(joystick, 2, .25);
+        rightTriggerButton = new JoystickButtonAxis(joystick, 3, .25);        
     }
 
     @Override
@@ -136,10 +139,10 @@ public class XboxController extends Controller {
     public Button getRightJoystickButton() {
         return leftStickButton;
     }
-    public AxisButton getLeftTriggerButton(double forceAmount, final Command command){
+    public JoystickButtonAxis getLeftTriggerButton(){
         return leftTriggerButton;
     }
-    public AxisButton getRightTriggerButton(double forceAmount, final Command command){
+    public JoystickButtonAxis getRightTriggerButton(){
         return rightTriggerButton;
     }
     
