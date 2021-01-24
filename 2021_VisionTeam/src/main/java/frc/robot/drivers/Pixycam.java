@@ -83,7 +83,7 @@ public class Pixycam {
         ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
 
         switch(priority) {
-            case BIGGEST: return searchForBlock(blocks, (Block block) -> CAM_WIDTH / Math.max(1, block.getWidth() * block.getHeight()));
+            case BIGGEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE / Math.max(1, block.getWidth() * block.getHeight()));
             case SMALLEST: return searchForBlock(blocks, (Block block) -> block.getWidth() * block.getHeight());
 
             case OLDEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE / Math.max(1, block.getAge()));
