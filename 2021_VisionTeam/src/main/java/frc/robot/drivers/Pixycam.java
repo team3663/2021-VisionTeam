@@ -118,7 +118,7 @@ public class Pixycam {
         int resultMetric = 0;
 
         for(Block currentBlock : blocks) {
-            int currentMetric = evaluator.evaluate(currentBlock);
+            int currentMetric = Math.abs(evaluator.evaluate(currentBlock));
             if(currentMetric < resultMetric) {
                 result = currentBlock;
                 resultMetric = currentMetric;
