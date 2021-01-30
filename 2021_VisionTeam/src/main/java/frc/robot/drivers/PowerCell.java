@@ -35,6 +35,11 @@ public class PowerCell extends Block {
         return super.getWidth() * super.getHeight();
     }
 
+
+    public double getErrorX() {
+        return getX() / Pixy.getInstance().getCamWidth();
+    }
+
     /*
     public int getDistance() {
         return -1; //TODO

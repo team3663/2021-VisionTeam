@@ -4,21 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.drivers.Pixy;
+import frc.robot.drivers.PowerCell;
+import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_TrackPowerCell extends CommandBase {
-  /** Creates a new C_TrackPowerCell. */
+
+  private SS_DriveTrain driveTrain;
+  private PIDController pid;
+  private Pixy pixy;
+
   public C_TrackPowerCell() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    driveTrain = SS_DriveTrain.getinstance();
+    addRequirements(driveTrain);
+
+    pixy = Pixy.getInstance();
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.setPower(0, 0);
+  }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    PowerCell cell = pixy.getBiggestPowerCell();
+
+    if(cell == null) {
+      driveTrain.setPower(0, 0);
+      return;
+    }
+
+    driveTrain.arcadeDrive(cell.getErrorX(), (5000 - cell.getSize()) / 5000);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
