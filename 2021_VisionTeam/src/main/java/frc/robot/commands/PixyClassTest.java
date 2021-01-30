@@ -20,7 +20,7 @@ public class PixyClassTest extends CommandBase {
   @Override
   public void execute() {
     PowerCell cell = pixy.getBiggestPowerCell();
-
+    
     if(cell == null) {
       SmartDashboard.putNumber("pixy x offsest", -1);
       SmartDashboard.putNumber("pixy y offsest", -1);
