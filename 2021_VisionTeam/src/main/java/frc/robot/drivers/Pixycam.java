@@ -6,6 +6,7 @@ package frc.robot.drivers;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
@@ -58,6 +59,13 @@ public class Pixycam {
         H_LINE //block closest tp given horizontal line
     }
 
+    //post new telemetry data to Smart Dashboard
+    public void updateTelemetry() {
+        SmartDashboard.putNumber("Pixy X", getXOffset(Priority.BIGGEST));
+        SmartDashboard.putNumber("Pixy Y", getYOffset(Priority.BIGGEST));
+        SmartDashboard.putNumber("Pixy num blocks", pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, MAX_POWER_CELLS));
+    }
+
     //get the x offset of the power cell with the highest priority
     public double getXOffset(Priority priority, int x, int y) {
         return findMatchingBlock(priority, x, y).getX();
@@ -83,10 +91,10 @@ public class Pixycam {
         ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
 
         switch(priority) {
-            case BIGGEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE / Math.max(1, block.getWidth() * block.getHeight()));
+            case BIGGEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE - block.getWidth() * block.getHeight());
             case SMALLEST: return searchForBlock(blocks, (Block block) -> block.getWidth() * block.getHeight());
 
-            case OLDEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE / Math.max(1, block.getAge()));
+            case OLDEST: return searchForBlock(blocks, (Block block) -> Integer.MAX_VALUE - block.getAge());
             case NEWEST: return searchForBlock(blocks, (Block block) -> block.getAge());
 
             case TOP: return searchForBlock(blocks, (Block block) -> getDistance(0, block.getY(), 0, CAM_HHEIGHT));
