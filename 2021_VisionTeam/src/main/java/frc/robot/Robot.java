@@ -60,12 +60,11 @@ public class Robot extends TimedRobot {
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
-
   public void autonomousInit() {
     new C_Track_WITH_PIXY().schedule();
     //new C_Track().schedule();
 
-    new PixyClassTest().schedule();
+    //new PixyClassTest().schedule();
 
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 

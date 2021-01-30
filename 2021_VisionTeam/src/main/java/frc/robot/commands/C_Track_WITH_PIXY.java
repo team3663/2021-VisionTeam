@@ -4,9 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.drivers.Pixy;
+import frc.robot.drivers.PowerCell;
 import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_Track_WITH_PIXY extends CommandBase {
@@ -28,19 +30,26 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(pixy.getBiggestPowerCell() == null) {
-      drive.setPower(Constants.noPower, Constants.noPower);
-      return;
-    }
+    PowerCell biggest = pixy.getBiggestPowerCell();
+    try {
+      SmartDashboard.putNumber("X Offset", biggest.getX());
+      if(biggest == null) {
+        drive.setPower(Constants.noPower, Constants.noPower);
+        return;
+      }
 
-    if(pixy.getBiggestPowerCell().getX() > 10) {
-      drive.setPower(-Constants.leftPower, Constants.rightPower);
+      if(biggest.getX() > 0) {
+        drive.setPower(-Constants.leftPower, Constants.rightPower);
+      }
+      else if(biggest.getX() < 0) {
+        drive.setPower(Constants.leftPower, -Constants.rightPower);
+      }
+      else {
+        drive.setPower(Constants.noPower, Constants.noPower);
+      }
     }
-    else if(pixy.getBiggestPowerCell().getX() < -10) {
-      drive.setPower(Constants.leftPower, -Constants.rightPower);
-    }
-    else {
-      drive.setPower(Constants.noPower, Constants.noPower);
+    catch(Exception e) {
+      //Nothing lol
     }
   }
 
