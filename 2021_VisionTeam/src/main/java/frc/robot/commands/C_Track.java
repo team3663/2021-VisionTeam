@@ -12,7 +12,7 @@ public class C_Track extends CommandBase {
     private Limelight limelight = Limelight.getinstance();
     private SS_DriveTrain driveTrain = SS_DriveTrain.getinstance();
     public C_Track() {
-        addRequirements(driveTrain);
+      addRequirements(driveTrain);
     }
 
   // Called when the command is initially scheduled.

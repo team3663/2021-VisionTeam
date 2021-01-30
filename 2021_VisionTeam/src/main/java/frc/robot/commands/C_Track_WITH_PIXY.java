@@ -4,21 +4,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.Util.XboxGamepad;
+import frc.robot.drivers.Pixycam;
+import frc.robot.drivers.Pixycam.Priority;
 import frc.robot.subsystems.SS_DriveTrain;
 
-public class C_Drive extends CommandBase {
-  /** Creates a new C_Drive. */
-private SS_DriveTrain drive;
-private XboxGamepad controller;
-  public C_Drive() {
-    drive = SS_DriveTrain.getinstance();
-    controller = RobotContainer.getXboxController();
-    addRequirements(SS_DriveTrain.getinstance());
+public class C_Track_WITH_PIXY extends CommandBase {
+  
+  private SS_DriveTrain drive = SS_DriveTrain.getinstance();
+  private Pixycam pixycam = Pixycam.getInstance();
+  
+  public C_Track_WITH_PIXY() {
+    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
@@ -30,13 +29,21 @@ private XboxGamepad controller;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.setPower(controller.getRawAxis(Axis.kLeftY.value), controller.getRawAxis(Axis.kRightY.value));
+    if(pixycam.getXOffset(Priority.BIGGEST) > 0) {
+      drive.setPower(-Constants.leftPower, Constants.rightPower);
+    }
+    else if(pixycam.getXOffset(Priority.BIGGEST) < 0) {
+      drive.setPower(Constants.leftPower, -Constants.rightPower);
+    }
+    else {
+      drive.setPower(Constants.noPower, Constants.noPower);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.setPower(0,0);
+    //drive.setPower(Constants.noPower, Constants.noPower);
   }
 
   // Returns true when the command should end.

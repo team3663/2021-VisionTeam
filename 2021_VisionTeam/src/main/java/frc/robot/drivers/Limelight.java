@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Limelight {
 
+  
+  //Gets the instance of the limelight
   private static Limelight instance;
-
-  public static Limelight getInstance() {
-    if(instance == null) {
+  public static Limelight getinstance() {
+    if(instance==null){
       instance = new Limelight();
     }
-
     return instance;
   }
-
+  
   //led mode constants
   public static final int LED_PIPELINE = 0; //use the LED Mode set in the current pipeline
   public static final int LED_OFF = 1; //force off
@@ -159,16 +159,6 @@ public class Limelight {
     }
     return -1;
   }
-
-  //Gets the instance of the limelight
-  private static Limelight instance;
-  public static Limelight getinstance() {
-    if(instance==null){
-      instance = new Limelight();
-    }
-    return instance;
-  }
-
 
   public enum Axis {
     PITCH,
