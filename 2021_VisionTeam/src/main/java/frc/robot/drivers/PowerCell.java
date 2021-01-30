@@ -31,7 +31,13 @@ public class PowerCell extends Block {
         return (Pixy.getInstance().getCamHeight() / 2) - super.getY();
     }
 
+    public int getSize() {
+        return super.getWidth() * super.getHeight();
+    }
+
+    /*
     public int getDistance() {
         return -1; //TODO
     }
+    */
 }

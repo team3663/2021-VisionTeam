@@ -71,7 +71,7 @@ public class Pixy {
         PowerCell largestCell = powerCells.get(0);
 
         for(PowerCell cell : powerCells) {
-            if(cell.getWidth() * cell.getHeight() > largestCell.getWidth() * largestCell.getHeight()) {
+            if(cell.getSize() > largestCell.getSize()) {
                 largestCell = cell;
             }
         }
