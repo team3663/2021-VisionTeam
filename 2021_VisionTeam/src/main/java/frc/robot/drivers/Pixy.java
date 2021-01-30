@@ -11,6 +11,8 @@ import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import io.github.pseudoresonance.pixy2api.links.SPILink;
 
+import frc.robot.drivers.PowerCell;
+
 public class Pixy {
 
     private static Pixy instance;
@@ -53,8 +55,8 @@ public class Pixy {
         ArrayList<PowerCell> powerCells = new ArrayList<PowerCell>();
 
         //cast the blocks to power cells
-        for(Block currentBlock : blocks) {
-            powerCells.add((PowerCell)currentBlock);
+        for(Block b : blocks) {
+            powerCells.add(new PowerCell(b.getSignature(), b.getX(), b.getY(), b.getWidth(), b.getHeight(), b.getAngle(), b.getIndex(), b.getAge()));
         }
 
         return powerCells;
@@ -69,7 +71,7 @@ public class Pixy {
         PowerCell largestCell = powerCells.get(0);
 
         for(PowerCell cell : powerCells) {
-            if(cell.getWidth() * cell.getHeight() >largestCell.getWidth() * largestCell.getHeight()) {
+            if(cell.getWidth() * cell.getHeight() > largestCell.getWidth() * largestCell.getHeight()) {
                 largestCell = cell;
             }
         }

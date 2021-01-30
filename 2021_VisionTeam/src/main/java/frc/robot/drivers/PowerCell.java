@@ -20,6 +20,6 @@ public class PowerCell extends Block {
 
     @Override
     public int getY() {
-        return super.getY() - (Pixy.getInstance().getCamHeight() / 2);
+        return (Pixy.getInstance().getCamHeight() / 2) - super.getY();
     }
 }

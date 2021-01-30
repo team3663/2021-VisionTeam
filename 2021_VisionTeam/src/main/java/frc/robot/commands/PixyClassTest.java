@@ -20,8 +20,14 @@ public class PixyClassTest extends CommandBase {
   @Override
   public void execute() {
     PowerCell cell = pixy.getBiggestPowerCell();
-    SmartDashboard.putNumber("pixy x offsest", cell.getX());
-    SmartDashboard.putNumber("pixy y offsest", cell.getY());
+
+    if(cell == null) {
+      SmartDashboard.putNumber("pixy x offsest", -1);
+      SmartDashboard.putNumber("pixy y offsest", -1);
+    } else {
+      SmartDashboard.putNumber("pixy x offsest", cell.getX());
+      SmartDashboard.putNumber("pixy y offsest", cell.getY());
+    }
   }
 
   // Returns true when the command should end.
