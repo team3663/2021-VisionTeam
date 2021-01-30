@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
   @Override
 
   public void autonomousInit() {
-    //new C_Track_WITH_PIXY().schedule();
+    new C_Track_WITH_PIXY().schedule();
     //new C_Track().schedule();
 
     new PixyTest().schedule();

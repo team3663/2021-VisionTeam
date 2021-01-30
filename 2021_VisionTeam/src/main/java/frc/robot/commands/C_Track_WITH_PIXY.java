@@ -6,17 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.drivers.Pixycam;
-import frc.robot.drivers.Pixycam.Priority;
+import frc.robot.drivers.Pixy;
 import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_Track_WITH_PIXY extends CommandBase {
   
   private SS_DriveTrain drive = SS_DriveTrain.getinstance();
-  private Pixycam pixycam = Pixycam.getInstance();
+  private Pixy pixy;
   
   public C_Track_WITH_PIXY() {
+    pixy = Pixy.getInstance();
     addRequirements(drive);
   }
 
@@ -29,10 +28,15 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(pixycam.getXOffset(Priority.BIGGEST) > 0) {
+    if(pixy.getBiggestPowerCell() == null) {
+      drive.setPower(Constants.noPower, Constants.noPower);
+      return;
+    }
+
+    if(pixy.getBiggestPowerCell().getX() > 10) {
       drive.setPower(-Constants.leftPower, Constants.rightPower);
     }
-    else if(pixycam.getXOffset(Priority.BIGGEST) < 0) {
+    else if(pixy.getBiggestPowerCell().getX() < -10) {
       drive.setPower(Constants.leftPower, -Constants.rightPower);
     }
     else {
