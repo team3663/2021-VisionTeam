@@ -11,12 +11,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 public class PixyTest extends CommandBase {
 
   private final int MAX_POWER_CELLS = 10;
 
   private Pixy2 pixy;
+
+  public PixyTest() {
+    pixy = Pixy2.createInstance(new SPILink());
+    pixy.init();
+  }
 
   @Override 
   public void execute() { 
