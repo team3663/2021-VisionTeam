@@ -44,7 +44,7 @@ public class Limelight {
   private NetworkTableEntry camtran; //Results of a 3D position solution, 6 numbers: Translation (x,y,y) Rotation(pitch,yaw,roll)
   
   public Limelight() {
-    visionTable = NetworkTableInstance.getDefault().getTable("limelight-testing");
+    visionTable = NetworkTableInstance.getDefault().getTable("limelight");
     tx = visionTable.getEntry("tx");
     ty = visionTable.getEntry("ty");
     tv = visionTable.getEntry("tv");
@@ -149,6 +149,16 @@ public class Limelight {
     }
     return -1;
   }
+
+  //Gets the instance of the limelight
+  private static Limelight instance;
+  public static Limelight getinstance() {
+    if(instance==null){
+      instance = new Limelight();
+    }
+    return instance;
+  }
+
 
   public enum Axis {
     PITCH,
