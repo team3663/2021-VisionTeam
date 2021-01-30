@@ -68,7 +68,11 @@ public class Pixycam {
 
     //get the x offset of the power cell with the highest priority
     public double getXOffset(Priority priority, int x, int y) {
-        return findMatchingBlock(priority, x, y).getX();
+        try {
+            return findMatchingBlock(priority, x, y).getX();
+        } catch(Exception e) {
+            return 0;
+        }
     }
 
     public double getXOffset(Priority priority) {
@@ -77,7 +81,11 @@ public class Pixycam {
 
     //get the y offset of the power cell with the highest priority
     public double getYOffset(Priority priority, int x, int y) {
-        return findMatchingBlock(priority, x, y).getY();
+        try {
+            return findMatchingBlock(priority, x, y).getY();
+        } catch(Exception e) {
+            return 0;
+        }
     }
 
     public double getYOffset(Priority priority) {
@@ -114,6 +122,14 @@ public class Pixycam {
 
         //no block was found
         return null;
+    }
+
+    private int normalizeX(Block block) {
+        return block.getX() - CAM_HWIDTH;
+    }
+
+    private int normalizeY(Block block) {
+        return block.getY() - CAM_HHEIGHT;
     }
 
     private interface BlockEvaluation {
