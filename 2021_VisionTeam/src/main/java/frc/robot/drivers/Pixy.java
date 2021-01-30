@@ -55,8 +55,8 @@ public class Pixy {
         ArrayList<PowerCell> powerCells = new ArrayList<PowerCell>();
 
         //cast the blocks to power cells
-        for(Block b : blocks) {
-            powerCells.add(new PowerCell(b.getSignature(), b.getX(), b.getY(), b.getWidth(), b.getHeight(), b.getAngle(), b.getIndex(), b.getAge()));
+        for(Block currentBlock : blocks) {
+            powerCells.add(new PowerCell(currentBlock));
         }
 
         return powerCells;
