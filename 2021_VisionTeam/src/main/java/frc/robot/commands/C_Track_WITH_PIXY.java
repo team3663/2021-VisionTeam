@@ -34,10 +34,6 @@ public class C_Track_WITH_PIXY extends CommandBase {
     try {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
-      if(biggest == null) {
-        drive.setPower(Constants.noPower, Constants.noPower);
-        return;
-      }
 
       if(biggest.getX() > 10 && biggest.getSize() < 5000) {
         drive.setPower(-Constants.leftPower, Constants.rightPower);
@@ -60,7 +56,7 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //drive.setPower(Constants.noPower, Constants.noPower);
+    drive.setPower(Constants.noPower, Constants.noPower);
   }
 
   // Returns true when the command should end.
