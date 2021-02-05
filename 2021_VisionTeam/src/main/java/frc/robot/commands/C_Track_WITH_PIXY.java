@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,6 +16,7 @@ public class C_Track_WITH_PIXY extends CommandBase {
   
   private SS_DriveTrain drive = SS_DriveTrain.getinstance();
   private Pixy pixy;
+  private PIDController pid = new PIDController(0.01, 0, 0.0006);
   
   public C_Track_WITH_PIXY() {
     pixy = Pixy.getInstance();
@@ -35,7 +37,10 @@ public class C_Track_WITH_PIXY extends CommandBase {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
 
-      if(biggest.getX() > 10 && biggest.getSize() < 5000) {
+      double power = pid.calculate(biggest.getX());
+
+      drive.setPower(power, -power);
+      /*if(biggest.getX() > 10 && biggest.getSize() < 5000) {
         drive.setPower(-Constants.leftPower, Constants.rightPower);
       }
       else if(biggest.getX() < -10 && biggest.getSize() < 5000) {
@@ -46,7 +51,7 @@ public class C_Track_WITH_PIXY extends CommandBase {
       }
       else if(biggest.getX() < 10 && biggest.getX() > -10 && biggest.getSize() < 5000) {
         drive.setPower(-Constants.leftPower, -Constants.rightPower);
-      }
+      }*/
     }
     catch(Exception e) {
       //Nothing lol
