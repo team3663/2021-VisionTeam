@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,15 +24,13 @@ public class SS_DriveTrain extends SubsystemBase {
     return instance;
   }
 
-  private TalonSRXController leftMotor, rightMotor;
+  private TalonSRX leftMotor, rightMotor;
   private DifferentialDrive diffDrive;
 
   public SS_DriveTrain() {
     rightMotor = new TalonSRXController(Constants.LEFT_DRIVE);
     leftMotor = new TalonSRXController(Constants.RIGTH_DRIVE);
     rightMotor.setInverted(true);
-
-    diffDrive = new DifferentialDrive(leftMotor, rightMotor);
   }
 
   public void arcadeDrive(double power, double rotation) {

@@ -34,7 +34,8 @@ public class C_TrackPowerCell extends CommandBase {
 
     if(cell == null) {
       driveTrain.setPower(0, 0);
-      return;
+    } else {
+      driveTrain.arcadeDrive(0.5, cell.getErrorX());
     }
 
     driveTrain.arcadeDrive(0.5, cell.getErrorX());
