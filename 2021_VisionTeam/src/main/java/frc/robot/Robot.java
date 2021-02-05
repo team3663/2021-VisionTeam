@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.C_Drive;
 import frc.robot.commands.C_Track;
+import frc.robot.commands.C_TrackPowerCell;
 import frc.robot.commands.C_Track_WITH_PIXY;
 import frc.robot.commands.PixyClassTest;
 import frc.robot.commands.PixyTest;
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     new C_Track_WITH_PIXY().schedule();
+    //new C_TrackPowerCell().schedule();
     //new C_Track().schedule();
 
     //new PixyClassTest().schedule();

@@ -37,7 +37,7 @@ public class C_TrackPowerCell extends CommandBase {
       return;
     }
 
-    driveTrain.arcadeDrive(cell.getErrorX(), (5000 - cell.getSize()) / 5000);
+    driveTrain.arcadeDrive(0.5, cell.getErrorX());
   }
 
   // Called once the command ends or is interrupted.

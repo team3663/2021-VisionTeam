@@ -39,22 +39,6 @@ public class C_Track_WITH_PIXY extends CommandBase {
         return;
       }
 
-      /*if(biggest.getX() > 0) {
-        drive.setPower(-Constants.leftPower, Constants.rightPower);
-      }
-      else if(biggest.getX() < 0) {
-        drive.setPower(Constants.leftPower, -Constants.rightPower);
-      }
-      else if(biggest.getSize() > 5000) {
-        drive.setPower(Constants.leftPower, Constants.rightPower);
-      }
-      else if(biggest.getSize() < 5000) {
-        drive.setPower(-Constants.leftPower, -Constants.rightPower);
-      }
-      else {
-        drive.setPower(Constants.noPower, Constants.noPower);
-      }*/
-
       if(biggest.getX() > 10 && biggest.getSize() < 5000) {
         drive.setPower(-Constants.leftPower, Constants.rightPower);
       }
