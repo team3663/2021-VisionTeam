@@ -69,14 +69,14 @@ public class C_Track_WITH_PIXY extends CommandBase {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
 
-      double power = pidDrive.calculate(5000 - biggest.getSize());
+      double power = pidDrive.calculate(6000 - biggest.getSize());
       double rotation = pidRotation.calculate(biggest.getX());
 
-      if(5000 - biggest.getSize() < 5000) {
+      if(biggest.getSize() < 6000) {
         drive.arcadeDrive(power, -rotation);
       }
-      else if(5000 - biggest.getSize() > 5000) {
-        drive.arcadeDrive(-power, Constants.noPower);
+      else {
+        drive.arcadeDrive(-power, 0);
       }
 
       //drive.setPower(power, -power);
