@@ -23,12 +23,12 @@ public class PowerCell extends Block {
 
     @Override
     public int getX() {
-        return super.getX() - (Pixy.getInstance().getCamWidth() / 2) - super.getWidth() / 2;
+        return super.getX() - (Pixy.getInstance().getCamWidth() / 2);
     }
 
     @Override
     public int getY() {
-        return super.getWidth() / 2 + (Pixy.getInstance().getCamHeight() / 2) - super.getY();
+        return (Pixy.getInstance().getCamHeight() / 2) - super.getY();
     }
 
     public int getSize() {

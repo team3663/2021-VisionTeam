@@ -27,7 +27,7 @@ public class SS_DriveTrain extends SubsystemBase {
   private TalonSRX leftMotor, rightMotor;
 
   public SS_DriveTrain() {
-    rightMotor = new TalonSRXController(Constants.LEFT_DRIVE);
+    rightMotor = new TalonSRXController(Constants.LEFT_DRIVE);  
     leftMotor = new TalonSRXController(Constants.RIGTH_DRIVE);
     rightMotor.setInverted(true);
   }
