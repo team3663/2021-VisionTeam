@@ -18,29 +18,30 @@ import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_Track_WITH_PIXY extends CommandBase {
   
-  NetworkTableEntry kP;
-  NetworkTableEntry kI;
-  NetworkTableEntry kD;
+  NetworkTableEntry kPr;
+  NetworkTableEntry kIr;
+  NetworkTableEntry kDr;
 
   private SS_DriveTrain drive = SS_DriveTrain.getinstance();
   private Pixy pixy;
-  private PIDController pid = new PIDController(0.01, 0, 0.00055);
+  private PIDController pidDrive = new PIDController(0.0001, 0, 0);
+  private PIDController pidRotation = new PIDController(0.01, 0, 0.00055);
   
   public C_Track_WITH_PIXY() {
     ShuffleboardTab pidTab = Shuffleboard.getTab("PID Tab");
-    kP = pidTab.add("kP", 0.0)
+    kPr = pidTab.add("kP", 0.0)
       .withWidget(BuiltInWidgets.kTextView)
       .withPosition(0, 0)
       .withSize(2, 1)
       .getEntry();
     
-    kI = pidTab.add("kI", 0.0)
+    kIr = pidTab.add("kI", 0.0)
     .withWidget(BuiltInWidgets.kTextView)
     .withPosition(0, 1)
     .withSize(2, 1)
     .getEntry();
 
-    kD = pidTab.add("kD", 0.0)
+    kDr = pidTab.add("kD", 0.0)
       .withWidget(BuiltInWidgets.kTextView)
       .withPosition(0, 2)
       .withSize(2, 1)
@@ -59,19 +60,27 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pid.setP(kP.getDouble(0));
-    pid.setI(kI.getDouble(0));
-    pid.setD(kD.getDouble(0));
+    pidRotation.setP(kPr.getDouble(0));
+    pidRotation.setI(kIr.getDouble(0));
+    pidRotation.setD(kDr.getDouble(0));
 
     PowerCell biggest = pixy.getBiggestPowerCell();
     try {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
 
-      double power = pid.calculate(biggest.getX());
+      double power = pidDrive.calculate(5000 - biggest.getSize());
+      double rotation = pidRotation.calculate(biggest.getX());
 
-      drive.setPower(power, -power);
-      
+      if(5000 - biggest.getSize() < 5000) {
+        drive.arcadeDrive(power, -rotation);
+      }
+      else if(5000 - biggest.getSize() > 5000) {
+        drive.arcadeDrive(-power, Constants.noPower);
+      }
+
+      //drive.setPower(power, -power);
+
       /*if(biggest.getX() > 10 && biggest.getSize() < 5000) {
         drive.setPower(-Constants.leftPower, Constants.rightPower);
       }
