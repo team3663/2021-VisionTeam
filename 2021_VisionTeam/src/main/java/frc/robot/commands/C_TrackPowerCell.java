@@ -4,7 +4,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.drivers.Pixy;
 import frc.robot.drivers.PowerCell;
@@ -12,8 +17,9 @@ import frc.robot.subsystems.SS_DriveTrain;
 
 public class C_TrackPowerCell extends CommandBase {
 
+  NetworkTableEntry movementDelayEntry;
+
   private SS_DriveTrain driveTrain;
-  private PIDController pid;
   private Pixy pixy;
 
   public C_TrackPowerCell() {
@@ -30,6 +36,7 @@ public class C_TrackPowerCell extends CommandBase {
 
   @Override
   public void execute() {
+
     PowerCell cell = pixy.getBiggestPowerCell();
 
     if(cell == null) {
