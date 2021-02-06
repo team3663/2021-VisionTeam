@@ -43,8 +43,6 @@ public class SS_DriveTrain extends SubsystemBase {
     }
   }
 
-
-
   public void setPower(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
     rightMotor.set(ControlMode.PercentOutput, rightPower);
