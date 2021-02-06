@@ -32,6 +32,8 @@ public class Pixy {
     public Pixy() {
         pixy = Pixy2.createInstance(new SPILink());
         pixy.init();
+        
+        pixy.setLamp((byte) 1, (byte) 1);
     }
 
     public int getNumPowerCells() {
