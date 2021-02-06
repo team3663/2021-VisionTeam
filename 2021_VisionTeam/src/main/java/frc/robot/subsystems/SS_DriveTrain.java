@@ -25,7 +25,6 @@ public class SS_DriveTrain extends SubsystemBase {
   }
 
   private TalonSRX leftMotor, rightMotor;
-  private DifferentialDrive diffDrive;
 
   public SS_DriveTrain() {
     rightMotor = new TalonSRXController(Constants.LEFT_DRIVE);
@@ -34,8 +33,16 @@ public class SS_DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double power, double rotation) {
-    diffDrive.arcadeDrive(power, rotation);
+    if(rotation > 0) {
+      setPower(power, (-2 * rotation + 1) * power);
+    } else if (rotation < 0) {
+      setPower((2 * rotation + 1) * power, power);
+    } else {
+      setPower(power, power);
+    }
   }
+
+
 
   public void setPower(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
