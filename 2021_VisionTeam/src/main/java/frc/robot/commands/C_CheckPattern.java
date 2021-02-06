@@ -4,10 +4,15 @@
 
 package frc.robot.commands;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.drivers.Pixy;
+import frc.robot.drivers.PowerCell;
 
 public class C_CheckPattern extends CommandBase {
 
@@ -15,23 +20,36 @@ public class C_CheckPattern extends CommandBase {
 
   public C_CheckPattern() {
     ShuffleboardTab tab = Shuffleboard.getTab("Pattern Training");
+
+    pattern = tab.add("Pattern Code", "none")
+      .withWidget(BuiltInWidgets.kTextView)
+      .withPosition(0, 0)
+      .withSize(4, 1)
+      .getEntry();
+
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void execute() {
+    String result = "{";
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+    ArrayList<PowerCell> cells = Pixy.getInstance().getPowerCells();
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    boolean first = true;
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    for(PowerCell cell : cells) {
+      if(!first) {
+        result += ", ";
+      }
+
+      result += "PowerCell.getMarkerCell(";
+      result += "" + cell.getX() + ", ";
+      result += "" + cell.getY() + ", ";
+      result += "" + cell.getSize() + ")";
+    }
+
+    result += "}";
+
+    pattern.setString(result);
   }
 }
