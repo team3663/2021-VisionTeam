@@ -16,8 +16,7 @@ public class PatternRecognition {
         RED_A(0),
         RED_B(1),
         BLUE_A(2),
-        BLUE_B(3),
-        UNKNOWN(-1);
+        BLUE_B(3);
 
         private PowerCell[][] PatternArray = {
             {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)},
@@ -44,7 +43,7 @@ public class PatternRecognition {
         
 
 
-        return Pattern.UNKNOWN;
+        return Pattern.RED_A;
     }
 
     private static double checkPattern(Pattern pattern, ArrayList<PowerCell> actual) {
