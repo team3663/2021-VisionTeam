@@ -39,12 +39,20 @@ public class PatternRecognition {
     }
 
     public static Pattern getPattern() {
-        checkPattern(Pattern.RED_A, Pixy.getInstance().getPowerCells());
+        Pattern results = Pattern.BLUE_A;
+        double finalConfidence = 0;
+        ArrayList<PowerCell> actulReading = Pixy.getInstance().getPowerCells();
+        for(Pattern curPattern: Pattern.values() ){
+            double currentConfidence = checkPattern(curPattern, actulReading);
 
-        
+            if(currentConfidence > finalConfidence) {
+                finalConfidence = currentConfidence;
+                results = curPattern;
+            }
+        }
 
-
-        return Pattern.UNKNOWN;
+        return results;
+       
     }
 
     private static double checkPattern(Pattern pattern, ArrayList<PowerCell> actual) {
