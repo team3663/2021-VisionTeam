@@ -48,19 +48,27 @@ public class PowerCell extends Block {
         int divide = 0;
 
         if(x) {
-            confidence += Math.abs(getX() - other.getX()) / ((getX() + other.getX()) / 2);
+            confidence += compareCurve(getX() - other.getX());
             divide++;
         }
         if(y) {
-            confidence += Math.abs(getY() - other.getY()) / ((getY() + other.getY()) / 2);
+            confidence += compareCurve(getY() - other.getY());
             divide++;
         }
         if(size) {
-            confidence += Math.abs(getSize() - other.getSize()) / ((getSize() + other.getSize()) / 2);
+            confidence += compareCurve(getSize() - other.getSize());
             divide++;
+        }
+
+        if(divide == 0) {
+            return confidence;
         }
         
         return confidence / divide;
+    }
+
+    public double compareCurve(double error) {
+        return 1 - Math.pow(Math.tanh(error * 0.05), 2);
     }
 
     /*

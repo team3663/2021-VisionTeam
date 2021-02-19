@@ -42,6 +42,11 @@ public class PatternRecognition {
         Pattern results = Pattern.BLUE_A;
         double finalConfidence = 0;
         ArrayList<PowerCell> actualReading = Pixy.getInstance().getPowerCells();
+
+        if(actualReading == null) {
+            return results;
+        }
+
         for(Pattern curPattern: Pattern.values() ){
             double currentConfidence = checkPattern(curPattern, actualReading);
 
@@ -65,6 +70,10 @@ public class PatternRecognition {
 
         double finalConfidence = 0;
         int avarageDivide = patternArr.size();
+
+        if(avarageDivide == 0) {
+            return 0;
+        }
 
         for(int i = 0; i < patternArr.size(); i++) {
 
