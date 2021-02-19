@@ -31,7 +31,7 @@ private XboxGamepad controller;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.setPower(controller.getRawAxis(Axis.kLeftY.value), controller.getRawAxis(Axis.kRightY.value));
+    drive.setPower(controller.getRawAxis(Axis.kLeftY.value), controller.getRawAxis(Axis.kRightY.value));  
   }
 
   // Called once the command ends or is interrupted.
