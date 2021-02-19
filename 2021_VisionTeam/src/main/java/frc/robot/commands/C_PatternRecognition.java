@@ -49,11 +49,6 @@ public class C_PatternRecognition extends CommandBase {
         default:
         break;
     }
-    
-
-    
   }
-
- 
-  }
+}
 

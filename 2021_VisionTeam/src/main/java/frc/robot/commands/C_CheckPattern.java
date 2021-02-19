@@ -35,6 +35,10 @@ public class C_CheckPattern extends CommandBase {
 
     ArrayList<PowerCell> cells = Pixy.getInstance().getPowerCells();
 
+    if(cells == null) {
+      return;
+    }
+
     boolean first = true;
 
     for(PowerCell cell : cells) {
@@ -51,5 +55,7 @@ public class C_CheckPattern extends CommandBase {
     result += "}";
 
     pattern.setString(result);
+
+    first = false;
   }
 }

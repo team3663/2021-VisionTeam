@@ -16,8 +16,8 @@ public class PatternRecognition {
         RED_A(0),
         RED_B(1),
         BLUE_A(2),
-        BLUE_B(3),
-        UNKNOWN(-1);
+        BLUE_B(3);
+        
 
         private PowerCell[][] PatternArray = {
             {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)},
@@ -43,7 +43,7 @@ public class PatternRecognition {
         double finalConfidence = 0;
         ArrayList<PowerCell> actulReading = Pixy.getInstance().getPowerCells();
         for(Pattern curPattern: Pattern.values() ){
-            double currentConfidence = checkPattern(curPattern, actulReading);
+            double currentConfidence = checkPattern(curPattern, actualReading);
 
             if(currentConfidence > finalConfidence) {
                 finalConfidence = currentConfidence;
