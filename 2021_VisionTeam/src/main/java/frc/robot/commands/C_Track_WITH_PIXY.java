@@ -61,7 +61,7 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.setPower(Constants.noPower, Constants.noPower);
+    drive.setPower(0, 0);
   }
 
   // Returns true when the command should end.
