@@ -69,15 +69,30 @@ public class C_Track_WITH_PIXY extends CommandBase {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
 
-      double power = pidDrive.calculate(6000 - biggest.getSize());
+      double power = pidDrive.calculate(5000 - biggest.getSize());
       double rotation = pidRotation.calculate(biggest.getX());
 
-      if(biggest.getSize() < 6000) {
-        drive.arcadeDrive(power, -rotation);
+      if(biggest.getX() > 25) {
+        drive.setPower(Constants.leftPower, -Constants.rightPower);
+      }
+      else if(biggest.getX() < -25) {
+        drive.setPower(-Constants.leftPower, Constants.rightPower);
       }
       else {
         drive.arcadeDrive(-power, 0);
       }
+
+      /*
+      if(biggest.getX() < 0 && biggest.getSize() < 3000) {
+        drive.setPower(-rotation, rotation);
+      }
+      else if(biggest.getX() > 0 && biggest.getSize() < 3000) {
+        drive.setPower(rotation, -rotation);
+      }
+      else if(biggest.getX() == 0) {
+        drive.arcadeDrive(power, 0);
+      }
+      */
 
       //drive.setPower(power, -power);
 
@@ -102,7 +117,7 @@ public class C_Track_WITH_PIXY extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.setPower(Constants.noPower, Constants.noPower);
+    drive.setPower(0, 0);
   }
 
   // Returns true when the command should end.

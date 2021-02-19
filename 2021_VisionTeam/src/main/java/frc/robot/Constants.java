@@ -18,7 +18,6 @@ public final class Constants {
     public static final int Xbox_Driver_Controller = 0;
 
     //Motor power constants
-    public static final double leftPower = 0.2;
-    public static final double rightPower = 0.2;
-    public static final int noPower = 0;
+    public static final double leftPower = 0.3;
+    public static final double rightPower = 0.3;
 }
