@@ -20,10 +20,10 @@ public class PatternRecognition {
         
 
         private PowerCell[][] PatternArray = {
-            {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)},
-            {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)},
-            {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)},
-            {PowerCell.getMarkerCell(1, 1, 1), PowerCell.getMarkerCell(1, 1, 1)}
+            {PowerCell.getMarkerCell(94, -54, 2640), PowerCell.getMarkerCell(-31, -48, 2538)},
+            {PowerCell.getMarkerCell(-45, -74, 3696), PowerCell.getMarkerCell(85, -14, 1840)},
+            {PowerCell.getMarkerCell(123, -79, 3290), PowerCell.getMarkerCell(-40, -26, 1924), PowerCell.getMarkerCell(53, 47, 132)},
+            {PowerCell.getMarkerCell(8, -85, 2660), PowerCell.getMarkerCell(-3, 5, 840), PowerCell.getMarkerCell(-11, 48, 242)}
         };
 
         Pattern(int newNumber) {
