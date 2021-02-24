@@ -81,7 +81,7 @@ public class PatternRecognition {
             int closestIndex = 0;
             for(int j = 0; j < actualArr.size(); j++) {
 
-                double currentConfidence = actualArr.get(0).compare(patternArr.get(j));
+                double currentConfidence = actualArr.get(0).compare(patternArr.get(j), true, true, false);
 
                 if(currentConfidence > closestConfidence) {
                     closestConfidence = currentConfidence;

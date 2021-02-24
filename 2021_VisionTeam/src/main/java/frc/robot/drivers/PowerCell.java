@@ -68,7 +68,7 @@ public class PowerCell extends Block {
     }
 
     public double compareCurve(double error) {
-        return 1 - Math.pow(Math.tanh(error * 0.05), 2);
+        return 1 - Math.pow(Math.tanh(error * 0.07), 2);
     }
 
     /*
