@@ -65,49 +65,28 @@ public class C_Track_WITH_PIXY extends CommandBase {
     pidRotation.setD(kDr.getDouble(0));
 
     PowerCell biggest = pixy.getBiggestPowerCell();
+
     try {
       SmartDashboard.putNumber("X Offset", biggest.getX());
       SmartDashboard.putNumber("Size", biggest.getSize());
-
+      SmartDashboard.putNumber("Age", biggest.getAge());
+  
       double power = pidDrive.calculate(5000 - biggest.getSize());
-      double rotation = pidRotation.calculate(biggest.getX());
-
-      if(biggest.getX() > 25) {
+      //double rotation = pidRotation.calculate(biggest.getX());
+  
+      if(biggest.getX() > 35) {
         drive.setPower(Constants.leftPower, -Constants.rightPower);
       }
-      else if(biggest.getX() < -25) {
+      else if(biggest.getX() < -35) {
         drive.setPower(-Constants.leftPower, Constants.rightPower);
+      }
+      else if(biggest.getSize() < 200 && biggest.getSize() > 0) {
+        drive.arcadeDrive(0, 0);
+        drive.setPower(0, 0);
       }
       else {
         drive.arcadeDrive(-power, 0);
       }
-
-      /*
-      if(biggest.getX() < 0 && biggest.getSize() < 3000) {
-        drive.setPower(-rotation, rotation);
-      }
-      else if(biggest.getX() > 0 && biggest.getSize() < 3000) {
-        drive.setPower(rotation, -rotation);
-      }
-      else if(biggest.getX() == 0) {
-        drive.arcadeDrive(power, 0);
-      }
-      */
-
-      //drive.setPower(power, -power);
-
-      /*if(biggest.getX() > 10 && biggest.getSize() < 5000) {
-        drive.setPower(-Constants.leftPower, Constants.rightPower);
-      }
-      else if(biggest.getX() < -10 && biggest.getSize() < 5000) {
-        drive.setPower(Constants.leftPower, -Constants.rightPower);
-      }
-      else if(biggest.getX() < 10 && biggest.getX() > -10 && biggest.getSize() > 5000) {
-        drive.setPower(Constants.leftPower, Constants.rightPower);
-      }
-      else if(biggest.getX() < 10 && biggest.getX() > -10 && biggest.getSize() < 5000) {
-        drive.setPower(-Constants.leftPower, -Constants.rightPower);
-      }*/
     }
     catch(Exception e) {
       //Nothing lol
