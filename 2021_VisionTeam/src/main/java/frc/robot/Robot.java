@@ -8,10 +8,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.C_CheckPattern;
+import frc.robot.Util.PatternRecognition2;
 import frc.robot.commands.C_ArcadeDrive;
 import frc.robot.commands.C_Drive;
+import frc.robot.commands.C_ModelTester;
+import frc.robot.commands.C_PatternModelBuilder;
 import frc.robot.commands.C_PatternRecognition;
 import frc.robot.commands.PixyClassTest;
+import frc.robot.commands.PixyData;
 import frc.robot.commands.PixyTest;
 
 /**
@@ -64,7 +68,7 @@ public class Robot extends TimedRobot {
 
   public void autonomousInit() {
 
-    new C_PatternRecognition().schedule();
+    new C_ModelTester().schedule();
 
     //new PixyClassTest().schedule();
 

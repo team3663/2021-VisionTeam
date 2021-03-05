@@ -21,6 +21,10 @@ public class PowerCell extends Block {
         super(b.getSignature(), b.getX(), b.getY(), b.getWidth(), b.getHeight(), b.getAngle(), b.getIndex(), b.getAge());
     }
 
+    public double distanceTo(int x, int y) {
+        return Math.sqrt(Math.pow(getX() - x, 2) + Math.pow(getY() - y, 2));
+    }
+
     @Override
     public int getX() {
         return super.getX() - (Pixy.getInstance().getCamWidth() / 2);
@@ -69,6 +73,19 @@ public class PowerCell extends Block {
 
     public double compareCurve(double error) {
         return 1 - Math.pow(Math.tanh(error * 0.07), 2);
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+
+        result += "X: " + getX() + " ";
+        result += "Y: " + getY() + " ";
+        result += "Size: " + getSize() + " ";
+        result += "Angle: " + getAngle() + " ";
+        result += "Age: " + getAge();
+
+        return result;
     }
 
     /*
